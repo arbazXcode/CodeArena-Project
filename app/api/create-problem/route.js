@@ -1,3 +1,4 @@
+export const runtime = "nodejs";
 import { getJudge0LanguageId, pollBatchResults, submitBatch } from "@/lib/judge0";
 import { currentUserRole, getCurrentUser } from "@/modules/auth/actions";
 
@@ -17,7 +18,7 @@ export async function POST(request) {
     }
 
     const body = await request.json();
-    
+
     const {
       title,
       description,
@@ -72,8 +73,8 @@ export async function POST(request) {
         expected_output: output,
       }));
 
-      
-   
+
+
 
       // Step 2.3: Submit all test cases in one batch
       const submissionResults = await submitBatch(submissions);
@@ -95,7 +96,7 @@ export async function POST(request) {
           language: language,
           error: result.stderr || result.compile_output,
         });
-        
+
         if (result.status.id !== 3) {
           return NextResponse.json(
             {
@@ -115,31 +116,31 @@ export async function POST(request) {
     }
 
     // Step 3: Save the problem in the database after all validations pass
-      const newProblem = await db.problem.create({
-        data: {
-          title,
-          description,
-          difficulty,
-          tags,
-          examples,
-          constraints,
-          testCases,
-          codeSnippets,
-          referenceSolutions,
-          userId: user.id,
-        },
-      });
+    const newProblem = await db.problem.create({
+      data: {
+        title,
+        description,
+        difficulty,
+        tags,
+        examples,
+        constraints,
+        testCases,
+        codeSnippets,
+        referenceSolutions,
+        userId: user.id,
+      },
+    });
 
-      return NextResponse.json({
-        success: true,
-        message: "Problem created successfully",
-        data: newProblem,
-      }, { status: 201 });
-    } catch (dbError) {
-      console.error("Database error:", dbError);
-      return NextResponse.json(
-        { error: "Failed to save problem to database" },
-        { status: 500 }
-      );
-  } 
+    return NextResponse.json({
+      success: true,
+      message: "Problem created successfully",
+      data: newProblem,
+    }, { status: 201 });
+  } catch (dbError) {
+    console.error("Database error:", dbError);
+    return NextResponse.json(
+      { error: "Failed to save problem to database" },
+      { status: 500 }
+    );
+  }
 }

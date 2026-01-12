@@ -1,3 +1,4 @@
+export const runtime = "nodejs";
 import { db } from "@/lib/db";
 import { currentUserRole, getCurrentUser } from "@/modules/auth/actions";
 import { UserRole } from "@prisma/client";

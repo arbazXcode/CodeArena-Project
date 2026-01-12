@@ -1,3 +1,4 @@
+export const runtime = "nodejs";
 import { db } from "@/lib/db";
 import CreateProblemForm from "@/modules/problems/components/create-problem-form";
 import { auth } from "@clerk/nextjs/server";
