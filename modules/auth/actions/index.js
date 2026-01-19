@@ -46,48 +46,42 @@ export const onBoardUser = async () => {
 };
 
 export const currentUserRole = async () => {
-  try {
-    const user = await currentUser();
+  const user = await currentUser();
 
-    if (!user) {
-      return null;
-    }
-
-    const { id } = user;
-
-    const userRole = await db.user.findUnique({
-      where: {
-        clerkId: id,
-      },
-      select: {
-        role: true,
-      },
-    });
-
-    return userRole?.role ?? null;
-  } catch (error) {
-    console.warn("User table not ready yet:", error.message);
+  if (!user) {
     return null;
   }
+
+  const userRole = await db.user.findUnique({
+    where: {
+      clerkId: user.id,
+    },
+    select: {
+      role: true,
+    },
+  });
+
+  return userRole?.role ?? null;
 };
+
 
 export const getCurrentUser = async () => {
-  try {
-    const user = await currentUser();
-    if (!user) return null;
+  const user = await currentUser();
 
-    const dbUser = await db.user.findUnique({
-      where: {
-        clerkId: user.id,
-      },
-      select: {
-        id: true,
-      },
-    });
-
-    return dbUser;
-  } catch (error) {
-    console.warn("User table not ready yet:", error.message);
+  if (!user) {
     return null;
   }
+
+  const dbUser = await db.user.findUnique({
+    where: {
+      clerkId: user.id,
+    },
+    select: {
+      id: true,
+      role: true,
+    },
+  });
+
+  return dbUser;
 };
+
