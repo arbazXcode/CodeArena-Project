@@ -6,9 +6,7 @@ export default async function ServerNavbar() {
 
   try {
     userRole = await currentUserRole();
-  } catch (error) {
-    console.warn("ServerNavbar: user role unavailable");
-  }
+  } catch (error) {}
 
   return <Navbar userRole={userRole} />;
 }

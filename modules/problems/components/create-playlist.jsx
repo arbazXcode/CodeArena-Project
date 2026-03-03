@@ -41,7 +41,7 @@ const CreatePlaylistModal = ({ isOpen, onClose, onSubmit }) => {
       reset();
       onClose();
     } catch (error) {
-      console.error("Error creating playlist:", error);
+      ("Error creating playlist:", error);
       toast.error("Failed to create playlist");
     } finally {
       setIsLoading(false);

@@ -23,7 +23,7 @@ export const getCurrentUserData = async () => {
 
         return data;
     } catch (error) {
-        console.error("Error fetching user:", error);
+        ("Error fetching user:", error);
         return { success: false, error: "Failed to fetch user" };
     }
 }

@@ -33,7 +33,6 @@ export const getAllProblems = async () => {
 
     return { success: true, data: problems };
   } catch (error) {
-    console.error("Error fetching problems:", error);
     return { success: false, error: "Failed to fetch problems" };
   }
 };
@@ -49,7 +48,7 @@ export const getProblemById = async (id) => {
 
     return { success: true, data: problem };
   } catch (error) {
-    console.error("❌ Error fetching problem:", error);
+    ("❌ Error fetching problem:", error);
     return { success: false, error: "Failed to fetch problem" };
   }
 };
@@ -78,7 +77,7 @@ export const deleteProblem = async (problemId) => {
     revalidatePath("/problems");
     return { success: true, message: "Problem deleted successfully" };
   } catch (error) {
-    console.error("Error deleting problem:", error);
+    ("Error deleting problem:", error);
     return {
       success: false,
       error: error.message || "Failed to delete problem",
@@ -142,7 +141,7 @@ export const editProblem = async (problemId, updatedData) => {
       data: updatedProblem,
     };
   } catch (error) {
-    console.error("Error editing problem:", error);
+    ("Error editing problem:", error);
     return {
       success: false,
       error: error.message || "Failed to edit problem",

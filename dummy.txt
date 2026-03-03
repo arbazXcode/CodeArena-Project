@@ -83,7 +83,7 @@ const ProblemIdPage = ({ params }) => {
           setCode(problemData.data.codeSnippets[selectedLanguage] || "");
         }
       } catch (error) {
-        console.error("Error fetching problem:", error);
+        ("Error fetching problem:", error);
       }
     };
 
@@ -101,7 +101,7 @@ const ProblemIdPage = ({ params }) => {
           setSubmissionHistory(submissionHistory.data);
         }
       } catch (error) {
-        console.error("Error fetching problem:", error);
+        ("Error fetching problem:", error);
       }
     };
 
@@ -133,7 +133,7 @@ const ProblemIdPage = ({ params }) => {
         toast.success(res.message);
       }
     } catch (error) {
-      console.error("Error running code:", error);
+      ("Error running code:", error);
       toast.error(error.message);
     } finally {
       setIsRunning(false);
@@ -178,7 +178,7 @@ const ProblemIdPage = ({ params }) => {
         toast.error("❌ Wrong Answer");
       }
     } catch (error) {
-      console.error(error);
+      (error);
       toast.error("Error submitting solution");
     } finally {
       setIsSubmitting(false);

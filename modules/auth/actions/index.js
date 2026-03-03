@@ -63,7 +63,6 @@ export const onBoardUser = async () => {
 
     return { success: true };
   } catch (error) {
-    console.error("onBoardUser error:", error);
     return { success: false };
   }
 };

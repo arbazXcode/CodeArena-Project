@@ -65,13 +65,13 @@ const ProblemsTable = ({ problems, user }) => {
   const filteredProblems = useMemo(() => {
     return (problems || [])
       .filter((problem) =>
-        problem.title.toLowerCase().includes(search.toLowerCase())
+        problem.title.toLowerCase().includes(search.toLowerCase()),
       )
       .filter((problem) =>
-        difficulty === "ALL" ? true : problem.difficulty === difficulty
+        difficulty === "ALL" ? true : problem.difficulty === difficulty,
       )
       .filter((problem) =>
-        selectedTag === "ALL" ? true : problem.tags?.includes(selectedTag)
+        selectedTag === "ALL" ? true : problem.tags?.includes(selectedTag),
       );
   }, [problems, search, difficulty, selectedTag]);
 
@@ -81,7 +81,7 @@ const ProblemsTable = ({ problems, user }) => {
   const paginatedProblems = useMemo(() => {
     return filteredProblems.slice(
       (currentPage - 1) * itemsPerPage,
-      currentPage * itemsPerPage
+      currentPage * itemsPerPage,
     );
   }, [filteredProblems, currentPage]);
 
@@ -114,7 +114,7 @@ const ProblemsTable = ({ problems, user }) => {
         throw new Error(result.error);
       }
     } catch (error) {
-      console.error("Error creating playlist:", error);
+      ("Error creating playlist:", error);
       toast.error(error.message || "Failed to create playlist");
     }
   };
@@ -136,7 +136,7 @@ const ProblemsTable = ({ problems, user }) => {
         throw new Error(result.error);
       }
     } catch (error) {
-      console.error("Error adding to playlist:", error);
+      ("Error adding to playlist:", error);
       toast.error(error.message || "Failed to add problem to playlist");
     }
   };
@@ -288,7 +288,7 @@ const ProblemsTable = ({ problems, user }) => {
                       <TableCell>
                         <Badge
                           className={`${getDifficultyColor(
-                            problem.difficulty
+                            problem.difficulty,
                           )} border-0 font-medium`}
                         >
                           {problem.difficulty}
