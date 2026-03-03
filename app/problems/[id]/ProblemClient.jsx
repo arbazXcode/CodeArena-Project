@@ -91,7 +91,6 @@ const ProblemClient = ({ problem, submissionHistory }) => {
       setExecutionResponse(res);
       if (res.success) toast.success(res.message);
     } catch (error) {
-      console.error("Error running code:", error);
       toast.error(error.message);
     } finally {
       setIsRunning(false);
@@ -129,7 +128,6 @@ const ProblemClient = ({ problem, submissionHistory }) => {
         toast.error("Wrong Answer");
       }
     } catch (error) {
-      console.error(error);
       toast.error("Error submitting solution");
     } finally {
       setIsSubmitting(false);

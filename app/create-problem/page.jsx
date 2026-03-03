@@ -12,7 +12,7 @@ const CreateProblemPage = async () => {
   const user = await currentUser();
   const role = await currentUserRole();
 
-  // 🔐 PAGE-LEVEL PROTECTION
+  //  PAGE-LEVEL PROTECTION
   if (!user || role !== UserRole.ADMIN) {
     redirect("/");
   }

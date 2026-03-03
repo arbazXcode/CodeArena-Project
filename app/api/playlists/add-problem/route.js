@@ -63,7 +63,6 @@ export async function POST(request, { params }) {
       data: problemInPlaylist,
     });
   } catch (error) {
-    console.error("Error adding problem to playlist:", error);
     return NextResponse.json(
       { success: false, error: "Failed to add problem to playlist" },
       { status: 500 }

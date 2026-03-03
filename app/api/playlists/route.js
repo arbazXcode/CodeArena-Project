@@ -50,7 +50,6 @@ export async function GET(request) {
       playlists,
     });
   } catch (error) {
-    console.error("Error fetching playlists:", error);
     return NextResponse.json(
       { success: false, error: "Failed to fetch playlists" },
       { status: 500 }
@@ -103,7 +102,6 @@ export async function POST(request) {
       playlist,
     });
   } catch (error) {
-    console.error("Error creating playlist:", error);
     return NextResponse.json(
       { success: false, error: "Failed to create playlist" },
       { status: 500 }

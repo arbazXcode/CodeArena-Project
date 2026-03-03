@@ -5,7 +5,6 @@ import { currentUserRole, getCurrentUser } from "@/modules/auth/actions";
 import { UserRole } from "@prisma/client";
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
-import { resolveMetadata } from "next/dist/lib/metadata/resolve-metadata";
 
 
 export async function POST(request) {
@@ -88,14 +87,6 @@ export async function POST(request) {
       // Step 2.6: Validate that each test case passed (status.id === 3)
       for (let i = 0; i < results.length; i++) {
         const result = results[i];
-        console.log(`Test case ${i + 1} details:`, {
-          input: submissions[i].stdin,
-          expectedOutput: submissions[i].expected_output,
-          actualOutput: result.stdout,
-          status: result.status,
-          language: language,
-          error: result.stderr || result.compile_output,
-        });
 
         if (result.status.id !== 3) {
           return NextResponse.json(
@@ -137,7 +128,6 @@ export async function POST(request) {
       data: newProblem,
     }, { status: 201 });
   } catch (dbError) {
-    console.error("Database error:", dbError);
     return NextResponse.json(
       { error: "Failed to save problem to database" },
       { status: 500 }

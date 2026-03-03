@@ -39,7 +39,6 @@ export async function PUT(request, { params }) {
             data: updatedProblem,
         });
     } catch (error) {
-        console.error("UPDATE PROBLEM ERROR:", error);
         return NextResponse.json(
             { error: "Failed to update problem" },
             { status: 500 }

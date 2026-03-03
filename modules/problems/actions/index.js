@@ -232,7 +232,7 @@ export const executeCode = async (source_code, language_id, stdin, expected_outp
       compileOutput: detailedResults.some((r) => r.compile_output)
         ? JSON.stringify(detailedResults.map((r) => r.compile_output))
         : null,
-      status: allPassed ? "Accepted" : "Wrong Answer",
+      status: allPassed ? "ACCEPTED" : "WRONG_ANSWER",
       memory: detailedResults.some((r) => r.memory)
         ? JSON.stringify(detailedResults.map((r) => r.memory))
         : null,
@@ -258,18 +258,30 @@ export const executeCode = async (source_code, language_id, stdin, expected_outp
     })
   }
 
-  const testCaseResults = detailedResults.map((result) => ({
-    submissionId: submission.id,
-    testCase: result.testCase,
-    passed: result.passed,
-    stdout: result.stdout,
-    expected: result.expected,
-    stderr: result.stderr,
-    compileOutput: result.compile_output,
-    status: result.status,
-    memory: result.memory,
-    time: result.time,
-  }))
+  const testCaseResults = detailedResults.map((result) => {
+    let mappedStatus = "WRONG_ANSWER";
+
+    if (result.compile_output) {
+      mappedStatus = "COMPILATION_ERROR";
+    } else if (result.stderr) {
+      mappedStatus = "RUNTIME_ERROR";
+    } else if (result.passed) {
+      mappedStatus = "ACCEPTED";
+    }
+
+    return {
+      submissionId: submission.id,
+      testCase: result.testCase,
+      passed: result.passed,
+      stdout: result.stdout,
+      expected: result.expected,
+      stderr: result.stderr,
+      compileOutput: result.compile_output,
+      status: mappedStatus,
+      memory: result.memory,
+      time: result.time,
+    };
+  });
 
   await db.testCaseResult.createMany({ data: testCaseResults });
 

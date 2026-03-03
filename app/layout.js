@@ -15,8 +15,23 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Leetcode",
-  description: "Leetcode Clone",
+  title: {
+    default: "CodeArena",
+    template: "%s | CodeArena",
+  },
+  description:
+    "CodeArena is a modern platform to master Data Structures and Algorithms with real-time execution, detailed analytics, and competitive leaderboards.",
+  keywords: [
+    "CodeArena",
+    "Data Structures",
+    "Algorithms",
+    "Coding Practice",
+    "Competitive Programming",
+    "DSA",
+  ],
+  authors: [{ name: "Arbaz Alam" }],
+  creator: "Arbaz Alam",
+  metadataBase: new URL("https://codearena.dev"), // change later if needed
 };
 
 export default function RootLayout({ children }) {
@@ -24,7 +39,7 @@ export default function RootLayout({ children }) {
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
         <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+          className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
         >
           <ThemeProvider
             attribute="class"
@@ -32,7 +47,7 @@ export default function RootLayout({ children }) {
             enableSystem
             disableTransitionOnChange
           >
-            <Toaster />
+            <Toaster richColors position="top-right" />
             {children}
           </ThemeProvider>
         </body>
